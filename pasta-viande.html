@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pâtes & Viande Blanche - Big Ben Café</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-gold: #C9A96E;
+            --dark-gold: #B8941F;
+            --deep-navy: #1B2951;
+            --charcoal: #2A2A2A;
+            --warm-white: #FEFCF8;
+            --cream: #F8F6F0;
+            --accent-burgundy: #8B2635;
+            --text-dark: #2C2C2C;
+            --text-muted: #6B7280;
+            --border-light: #E5E7EB;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --shadow-dark: rgba(0, 0, 0, 0.25);
+            --gradient-gold: linear-gradient(135deg, #C9A96E, #B8941F);
+            --gradient-navy: linear-gradient(135deg, #1B2951, #0F1A3A);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(254, 252, 248, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 2px 20px var(--shadow-light);
+        }
+        
+        .nav-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--deep-navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateY(-1px);
+        }
+        
+        .logo::before {
+            content: "🕰️";
+            font-size: 1.5rem;
+            filter: drop-shadow(0 2px 4px var(--shadow-light));
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            background: var(--cream);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .nav-menu a:hover {
+            background: var(--gradient-gold);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-navy);
+            color: white;
+            text-align: center;
+            padding: 120px 2rem 80px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23C9A96E" opacity="0.1"/><circle cx="75" cy="75" r="0.8" fill="%23C9A96E" opacity="0.08"/><circle cx="50" cy="10" r="0.3" fill="%23C9A96E" opacity="0.12"/><circle cx="90" cy="40" r="0.4" fill="%23C9A96E" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.4;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-clock {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: clockPulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+        
+        @keyframes clockPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.95; }
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.9;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 2rem;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 80px;
+        }
+        
+        .menu-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px var(--shadow-light), 0 10px 15px var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-gold);
+            border-radius: 0 24px 0 100%;
+            opacity: 0.08;
+        }
+        
+        .menu-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px var(--shadow-light), 0 25px 50px var(--shadow-medium);
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--deep-navy);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--accent-burgundy);
+            font-size: 1.125rem;
+            margin: 2.5rem 0 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--primary-gold);
+            letter-spacing: -0.025em;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            background: rgba(201, 169, 110, 0.04);
+            margin: 0 -1.25rem;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border-bottom: 1px solid transparent;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-info {
+            flex: 1;
+            padding-right: 1.5rem;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+        
+        .item-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.4;
+        }
+        
+        .item-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--accent-burgundy);
+            white-space: nowrap;
+            background: var(--cream);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 4px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover .item-price {
+            background: var(--gradient-gold);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            text-align: center;
+            margin: 80px 0;
+            position: relative;
+        }
+        
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 2px;
+            background: var(--gradient-gold);
+            border-radius: 1px;
+        }
+        
+        .section-divider::before { left: 0; }
+        .section-divider::after { right: 0; }
+        
+        .divider-icon {
+            background: white;
+            padding: 0 2rem;
+            font-size: 2rem;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50px;
+            display: inline-block;
+            box-shadow: 0 4px 12px var(--shadow-light);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--gradient-navy);
+            color: white;
+            text-align: center;
+            padding: 60px 2rem;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hours {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+        
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-gold);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(201, 169, 110, 0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(254, 252, 248, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                gap: 0;
+                padding: 1.5rem 0;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 8px 32px var(--shadow-medium);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu a {
+                padding: 1rem 2rem;
+                width: 100%;
+                text-align: left;
+                border-radius: 0;
+                font-size: 1rem;
+            }
+            
+            .hero {
+                padding: 100px 1.5rem 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+            
+            .main-content {
+                padding: 60px 1.5rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 60px;
+            }
+            
+            .menu-section {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.625rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .section-divider {
+                margin: 60px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-wrapper {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding: 80px 1rem 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .main-content {
+                padding: 40px 1rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .menu-section {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                padding: 1rem 0;
+            }
+            
+            .item-info {
+                padding-right: 0;
+            }
+            
+            .item-price {
+                align-self: flex-end;
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container" role="navigation" aria-label="Menu principal">
+        <div class="nav-wrapper">
+            <div class="nav-header">
+                <a href="index.html" class="logo" aria-label="Retour à l'accueil">← Big Ben Café</a>
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+                <ul class="nav-menu" id="navMenu" role="menubar">
+                    <li role="none"><a href="index.html" role="menuitem">Retour à l'accueil</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-clock" role="img" aria-label="Horloge">🕰️</div>
+            <h1>Pâtes & Viande Blanche</h1>
+            <p class="subtitle">Menu Digital - Saveurs Authentiques</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-button">← Retour aux catégories</a>
+        
+        <div class="menu-grid">
+            <!-- Section PASTA -->
+            <section id="pasta" class="menu-section">
+                <h2 class="section-title">PASTA</h2>
+
+                <div class="menu-item"><div class="item-info"><div class="item-name">Spaghetti Escalope</div></div><div class="item-price">18.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Penne Thon et Fromage Gruyère</div></div><div class="item-price">19.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Pasta Puttanesca</div></div><div class="item-price">21.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Penne Poulet Champignon</div></div><div class="item-price">24.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Spaghetti Bolognaise</div></div><div class="item-price">25.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Penne Poulet Panée Pesto</div></div><div class="item-price">25.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Tagliatelles 4 Fromage Filet</div></div><div class="item-price">27.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Pasta Poulet Sauce Rosée</div></div><div class="item-price">28.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Penne Crevette</div></div><div class="item-price">29.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Tagliatelles Pistache et Burrata</div></div><div class="item-price">31.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Pasta Fruits de Mer</div></div><div class="item-price">33.000</div></div>
+            </section>
+
+            <!-- Section VIANDE BLANCHE -->
+            <section id="viande-blanche" class="menu-section">
+                <h2 class="section-title">VIANDE BLANCHE</h2>
+
+                <div class="menu-item"><div class="item-info"><div class="item-name">Escalope Grillée</div></div><div class="item-price">16.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Cuisses de Poulet Croustillantes</div></div><div class="item-price">17.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Escalope Panée Sauce Fromage</div></div><div class="item-price">19.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Cordon Bleu Sauce Fromage</div></div><div class="item-price">22.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Poitrine de Poulet Sauce aux Champignons</div></div><div class="item-price">29.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Poulet à la Toscana</div></div><div class="item-price">32.000</div></div>
+                <div class="menu-item"><div class="item-info"><div class="item-name">Mixte Escalope</div></div><div class="item-price">39.000</div></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Big Ben Café</h3>
+            <p class="hours">Ouvert tous les jours de 8h00 à 23h00</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>+216 XX XXX XXX</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Adresse du café</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+        
+        function closeMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (navMenu && menuToggle && 
+                !navMenu.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+        
+        // Loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
